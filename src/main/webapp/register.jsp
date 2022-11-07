@@ -13,7 +13,7 @@
   <title>天天生鲜-注册</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
-  <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.6.1.js"></script>
   <script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
