@@ -6,8 +6,7 @@ Fruit online store - java web learning project
 - `main`分支：包含了水果在线商城最终版；
 - `static`分支: 包含了水果在线商城的静态设计；
 - `init-maven-project`分支: 包含了水果在线商城的初始maven项目；
-- `jsp-grammar-page-directive`分支: 包含了jsp基本语法和page指令的案例, register.jsp；
-- `jsp-include-directive`分支: 包含了include指令的案例, register.jsp；
+- `jsp-grammar-page-directive`分支: 包含了jsp基本语法和page include指令的案例, register.jsp；
 - `jsp-include-forward-action`分支: 包含了include、forward动作的案例, register.jsp；
 - `jsp-implicit-object`分支: 包含了jsp页面内置对象的案例, register.jsp；
 - `jsp-register-login`分支: 包含了jsp语法综合应用的案例, register.jsp；
