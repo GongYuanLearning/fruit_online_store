@@ -1,8 +1,12 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Objects" %><%--
   author: Zhijie Liu
   version: 1.0
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    List<String> errors = (List<String>) request.getAttribute("errors");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,9 +29,21 @@
                 <h1>用户登录</h1>
                 <a href="#">立即注册</a>
             </div>
+            <div class="errors">
+                <%
+                    if (Objects.nonNull(errors)) {
+                        for (String error : errors) {
+                %>
+                <div><%=error%></div>
+                <%
+                        }
+                    }
+                %>
+            </div>
             <div class="form_input">
-                <form>
-                    <input type="text" name="username" class="name_input" placeholder="请输入用户名">
+
+                <form action="login_handle.jsp" method="post">
+                    <input type="text" name="username" value="<%=session.getAttribute("username")%>" class="name_input" placeholder="请输入用户名">
                     <div class="user_error">输入错误</div>
                     <input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
                     <div class="pwd_error">输入错误</div>

@@ -640,3 +640,9 @@ html,body{height:100%}
 .stress{
 	color:#ff8800;
 }
+
+.errors {
+	font-size: 1rem;
+	margin: 15px 0;
+	color: #ba1414;
+}
