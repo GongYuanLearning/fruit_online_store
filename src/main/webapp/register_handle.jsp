@@ -11,7 +11,10 @@
     String pwd = request.getParameter("pwd");
     if ("user".equals(username) && "password".equals(pwd)) { // 用户名为user，密码为password，让页面跳转到login页面
 %>
-<jsp:forward page="login.jsp"></jsp:forward>
+<jsp:forward page="login.jsp">
+    <jsp:param name="username" value="<%= username %>"/>
+    <jsp:param name="pwd" value="<%= pwd %>"/>
+</jsp:forward>
 <%
 } else  {
     List<String> errors = new ArrayList<>(); // 存储错误消息的list
