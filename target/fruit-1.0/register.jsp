@@ -4,8 +4,12 @@
 --%>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.temporal.ChronoField" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
+<%
+  List<String> errors = (List<String>) request.getAttribute("errors");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,7 +17,7 @@
   <title>天天生鲜-注册</title>
   <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
-  <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.6.1.js"></script>
   <script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
@@ -30,11 +34,22 @@
       <a href="#">登录</a>
     </div>
     <div class="reg_form clearfix">
-      <form action="register_handle.html" method="post">
+      <div class="errors">
+        <%
+          if (Objects.nonNull(errors)) {
+            for (String error : errors) {
+        %>
+        <div><%=error%></div>
+        <%
+            }
+          }
+        %>
+      </div>
+      <form action="register_handle.jsp" method="post">
         <ul>
           <li>
             <label>用户名:</label>
-            <input type="text" name="user_name" id="user_name">
+            <input type="text" name="username" id="user_name">
             <span class="error_tip">提示信息</span>
           </li>
           <li>
@@ -68,7 +83,7 @@
 
 </div>
 
-  <%@include file="common/footer.jsp" %>
-
+<%--  <%@include file="common/footer.jsp" %>--%>
+  <jsp:include page="common/footer.jsp" />
 </body>
 </html>
