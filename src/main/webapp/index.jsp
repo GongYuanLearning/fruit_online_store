@@ -107,7 +107,7 @@
     </div>
 </div>
 <%
-    for(Map.Entry entry: productsByCategory.entrySet()) {
+    for(Map.Entry<String, List<Product>> entry: productsByCategory.entrySet()) {
 %>
 <div class="list_model">
     <div class="list_title clearfix">
@@ -120,26 +120,18 @@
     <div class="goods_con clearfix">
         <div class="goods_banner fl"><img src="images/banner01.jpg"></div>
         <ul class="goods_list fl">
+            <%
+                List<Product> products = entry.getValue();
+                for (Product product : products) {
+            %>
             <li>
-                <h4><a href="#">草莓</a></h4>
-                <a href="#"><img src="images/goods/goods003.jpg"></a>
-                <div class="prize">¥ 30.00</div>
+                <h4><a href="#"><%=product.getName()%></a></h4>
+                <a href="#"><img src="<%=product.getImagePath()%>"></a>
+                <div class="prize">¥ <%=product.getPrice()%></div>
             </li>
-            <li>
-                <h4><a href="#">葡萄</a></h4>
-                <a href="#"><img src="images/goods/goods002.jpg"></a>
-                <div class="prize">¥ 5.50</div>
-            </li>
-            <li>
-                <h4><a href="#">柠檬</a></h4>
-                <a href="#"><img src="images/goods/goods001.jpg"></a>
-                <div class="prize">¥ 3.90</div>
-            </li>
-            <li>
-                <h4><a href="#">奇异果</a></h4>
-                <a href="#"><img src="images/goods/goods012.jpg"></a>
-                <div class="prize">¥ 25.80</div>
-            </li>
+            <%
+                }
+            %>
         </ul>
     </div>
 </div>
