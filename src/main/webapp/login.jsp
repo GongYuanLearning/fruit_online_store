@@ -34,7 +34,7 @@
                     if (Objects.nonNull(errors)) {
                         for (String error : errors) {
                 %>
-                <div><%=error%></div>
+                <div>${error}</div>
                 <%
                         }
                     }
@@ -43,7 +43,7 @@
             <div class="form_input">
 
                 <form action="login_handle.jsp" method="post">
-                    <input type="text" name="username" value="<%=session.getAttribute("username")%>" class="name_input" placeholder="请输入用户名">
+                    <input type="text" name="username" value="${username}" class="name_input" placeholder="请输入用户名">
                     <div class="user_error">输入错误</div>
                     <input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
                     <div class="pwd_error">输入错误</div>

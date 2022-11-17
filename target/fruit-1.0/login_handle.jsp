@@ -28,13 +28,13 @@
 <%--    <jsp:useBean id="user" class="com.lzj.fruit.entity.User" scope="page" />--%>
 <%-- 参数的名称要跟java bean 对象的属性名完全一样，才可以绑定 --%>
 <%--    <jsp:setProperty name="user" property="*" />--%>
-用户名：<%=user.getUsername()%>
+用户名：${user.username}
 <%--<jsp:getProperty name="user" property="username" />--%>
 <br />
-密码：<%=user.getPassword()%>
+密码：${user.password}
 <%--<jsp:getProperty name="user" property="password" />--%>
 <br />
-邮箱：<%=user.getEmail()%>
+邮箱：${user.email}
 <%--<jsp:getProperty name="user" property="email" />--%>
 <%
 } else {

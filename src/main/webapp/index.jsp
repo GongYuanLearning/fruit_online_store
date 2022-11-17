@@ -49,6 +49,10 @@
         addProduct(names, prices, imagePaths, products);
         productsByCategory.put(category, products);
     }
+
+    request.setAttribute("categories", categories);
+    request.setAttribute("categoriesClasses", categoriesClasses);
+    request.setAttribute("productsByCategory", productsByCategory);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,8 +88,10 @@
             for (int i = 0; i < categories.size(); i++) {
                 String category = categories.get(i);
                 String categoryClass = categoriesClasses.get(i);
+                request.setAttribute("category", category);
+                request.setAttribute("categoryClass", categoryClass);
         %>
-        <li><a href="#<%=category%>" class="<%=categoryClass%>"><%=category%></a></li>
+        <li><a href="#${category}" class="${categoryClass}">${category}</a></li>
         <%
             }
         %>
@@ -123,11 +129,12 @@
             <%
                 List<Product> products = entry.getValue();
                 for (Product product : products) {
+                    request.setAttribute("product", product);
             %>
             <li>
-                <h4><a href="#"><%=product.getName()%></a></h4>
-                <a href="#"><img src="<%=product.getImagePath()%>"></a>
-                <div class="prize">¥ <%=product.getPrice()%></div>
+                <h4><a href="#">${product.name}</a></h4>
+                <a href="#"><img src="${product.imagePath}"></a>
+                <div class="prize">¥ ${product.price}</div>
             </li>
             <%
                 }

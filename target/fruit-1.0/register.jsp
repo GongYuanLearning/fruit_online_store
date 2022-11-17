@@ -39,7 +39,7 @@
           if (Objects.nonNull(errors)) {
             for (String error : errors) {
         %>
-        <div><%=error%></div>
+        <div>${error}</div>
         <%
             }
           }

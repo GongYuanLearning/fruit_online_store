@@ -11,7 +11,8 @@ Fruit online store - java web learning project
 - `jsp-implicit-object`分支: 包含了jsp页面内置对象的案例, register.jsp；
 - `jsp-register-login`分支: 包含了jsp语法综合应用的案例, index.jsp；
 - `jsp-register-login-bean`分支: 包含了java bean的案例, index.jsp；
-- `jsp-register-login-el`分支: 包含了el的案例, register.jsp；
+- `jsp-register-login-bean-mvc`分支: 包含了java bean的案例, login.jsp；
+- `jsp-register-login-el`分支: 包含了el的案例, login_handle.jsp；
 - `jsp-register-login-jstl`分支: 包含了jstl的案例, register.jsp；
 -  
 
