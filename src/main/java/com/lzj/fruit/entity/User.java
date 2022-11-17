@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 /**
  * User类对应数据库表user
  */
@@ -17,4 +19,5 @@ public class User {
     private String pwdHash;
     private String email;
     private String phone;
+    private LocalDate birthDate;
 }

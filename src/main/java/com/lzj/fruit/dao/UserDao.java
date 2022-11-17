@@ -1,5 +1,7 @@
 package com.lzj.fruit.dao;
 
+import com.lzj.fruit.dto.SearchResult;
+import com.lzj.fruit.dto.UserCriteria;
 import com.lzj.fruit.entity.User;
 
 public interface UserDao {
@@ -12,7 +14,9 @@ public interface UserDao {
      * 通过用户名查询用户
      * @return
      */
-    User getByUsername(String username) throws Exception;
+    User getByUsernameOrEmail(String username) throws Exception;
+
+    SearchResult<User> searchUsers(UserCriteria userCriteria) throws Exception;
 
     /**
      * 更新用户
@@ -27,4 +31,3 @@ public interface UserDao {
      */
     void delete(long id) throws Exception;
 }
-
