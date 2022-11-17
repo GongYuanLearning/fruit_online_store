@@ -4,7 +4,7 @@
 --%>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.temporal.ChronoField" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
   LocalDate now = LocalDate.now();
   int year = now.get(ChronoField.YEAR);

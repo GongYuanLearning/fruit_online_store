@@ -9,8 +9,8 @@ Fruit online store - java web learning project
 - `jsp-grammar-page-directive`分支: 包含了jsp基本语法和page include指令的案例, register.jsp；
 - `jsp-include-forward-action`分支: 包含了include、forward动作的案例, register.jsp；
 - `jsp-implicit-object`分支: 包含了jsp页面内置对象的案例, register.jsp；
-- `jsp-register-login`分支: 包含了jsp语法综合应用的案例, register.jsp；
-- `jsp-register-login-bean`分支: 包含了java bean的案例, register.jsp；
+- `jsp-register-login`分支: 包含了jsp语法综合应用的案例, index.jsp；
+- `jsp-register-login-bean`分支: 包含了java bean的案例, index.jsp；
 - `jsp-register-login-el`分支: 包含了el的案例, register.jsp；
 - `jsp-register-login-jstl`分支: 包含了jstl的案例, register.jsp；
 -  
