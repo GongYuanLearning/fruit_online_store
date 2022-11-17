@@ -9,6 +9,8 @@
   version: 1.0
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%!
     private static void addProduct(String[] names, BigDecimal[] prices, String[] imagePaths, List<Product> products) {
         for (int i = 0; i < names.length; i++) {
@@ -84,17 +86,9 @@
 
 <div class="center_con clearfix">
     <ul class="subnav fl">
-        <%
-            for (int i = 0; i < categories.size(); i++) {
-                String category = categories.get(i);
-                String categoryClass = categoriesClasses.get(i);
-                request.setAttribute("category", category);
-                request.setAttribute("categoryClass", categoryClass);
-        %>
-        <li><a href="#${category}" class="${categoryClass}">${category}</a></li>
-        <%
-            }
-        %>
+        <c:forEach items="${categories}" var="category" varStatus="status">
+            <li><a href="#${category}" class="${categoriesClasses[status.index]}">${category}</a></li>
+        </c:forEach>
     </ul>
     <div class="slide fl">
         <ul class="slide_pics">
@@ -112,12 +106,11 @@
         <a href="#"><img src="images/adv02.jpg"></a>
     </div>
 </div>
-<%
-    for(Map.Entry<String, List<Product>> entry: productsByCategory.entrySet()) {
-%>
+
+<c:forEach items="${productsByCategory}" var="entry">
 <div class="list_model">
     <div class="list_title clearfix">
-        <h3 class="fl" id="新鲜水果"><%=entry.getKey()%></h3>
+        <h3 class="fl" id="新鲜水果">${entry.key}</h3>
         <div class="subtitle fl">
         </div>
         <a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
@@ -126,25 +119,17 @@
     <div class="goods_con clearfix">
         <div class="goods_banner fl"><img src="images/banner01.jpg"></div>
         <ul class="goods_list fl">
-            <%
-                List<Product> products = entry.getValue();
-                for (Product product : products) {
-                    request.setAttribute("product", product);
-            %>
+            <c:forEach items="${entry.value}" var="product">
             <li>
                 <h4><a href="#">${product.name}</a></h4>
                 <a href="#"><img src="${product.imagePath}"></a>
                 <div class="prize">¥ ${product.price}</div>
             </li>
-            <%
-                }
-            %>
+            </c:forEach>
         </ul>
     </div>
 </div>
-<%
-    }
-%>
+</c:forEach>
 
 <%@include file="common/footer.jsp" %>
 </body>

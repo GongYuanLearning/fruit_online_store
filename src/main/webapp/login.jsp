@@ -1,11 +1,17 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Objects" %><%--
+<%@ page import="java.util.Objects" %>
+<%@ page import="java.util.ArrayList" %><%--
   author: Zhijie Liu
   version: 1.0
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
     List<String> errors = (List<String>) request.getAttribute("errors");
+    if (Objects.isNull(errors)) {
+        errors = new ArrayList<>();
+    }
 %>
 <!doctype html>
 <html lang="en">
@@ -30,15 +36,9 @@
                 <a href="#">立即注册</a>
             </div>
             <div class="errors">
-                <%
-                    if (Objects.nonNull(errors)) {
-                        for (String error : errors) {
-                %>
-                <div>${error}</div>
-                <%
-                        }
-                    }
-                %>
+                <c:forEach items="${errors}" var="error">
+                    <div>${error}</div>
+                </c:forEach>
             </div>
             <div class="form_input">
 
