@@ -8,9 +8,9 @@ import java.util.List;
 public class UserService {
     private static List<User> validUsers = new ArrayList<>();
     static {
-        validUsers.add(new User("admin", "admin", "admin@test.com"));
-        validUsers.add(new User("user", "password", "user@test.com"));
-        validUsers.add(new User("张三", "password", "user@test.com"));
+        validUsers.add(new User(1L, "admin", "admin", "", "admin@test.com", ""));
+        validUsers.add(new User(2L, "user", "password", "", "user@test.com", ""));
+        validUsers.add(new User(3L, "张三", "password", "", "user@test.com", ""));
     }
 
     public static List<User> getValidUsers() {
