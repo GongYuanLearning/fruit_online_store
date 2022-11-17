@@ -1,6 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.lzj.fruit.util.ServiceUtil" %>
+<%@ page import="com.lzj.fruit.entity.User" %>
+<%@ page import="com.lzj.fruit.service.UserService" %>
 <%--
   author: Zhijie Liu
   version: 1.0
@@ -14,19 +17,29 @@
 <body>
 <%
     // request.setCharacterEncoding(StandardCharsets.UTF_8.name());
-    String username = request.getParameter("username");
+    String username = ServiceUtil.decode(request.getParameter("username"));
     String pwd = request.getParameter("pwd");
-    String email = (String) session.getAttribute("email");
-    if ("user".equals(username) && "password".equals(pwd)) {
-%> <% out.write(username); %>: 你好，你已经登录成功！
-<br/>
-你的邮箱：<% out.write(email); %>
+    User user = new User(username, pwd, "");
+    pageContext.setAttribute("user", user, PageContext.PAGE_SCOPE); // 等同于下面的jsp:useBean申明的id为user的java bean
+    UserService userService = new UserService(); // 实例化JavaBean UserService
+    if (userService.login(username, pwd)) {
+%> 你好，你已经登录成功！
+<%--<jsp:forward page="index.jsp"></jsp:forward>--%>
+<%--    <jsp:useBean id="user" class="com.lzj.fruit.entity.User" scope="page" />--%>
+<%-- 参数的名称要跟java bean 对象的属性名完全一样，才可以绑定 --%>
+<%--    <jsp:setProperty name="user" property="*" />--%>
+用户名：<%=user.getUsername()%>
+<%--<jsp:getProperty name="user" property="username" />--%>
+<br />
+密码：<%=user.getPassword()%>
+<%--<jsp:getProperty name="user" property="password" />--%>
+<br />
+邮箱：<%=user.getEmail()%>
+<%--<jsp:getProperty name="user" property="email" />--%>
 <%
 } else {
-    session.setAttribute("username", username);
-    List<String> errors = new ArrayList<>(); // 存储错误消息的list
+    List<String> errors = new ArrayList<>();
     errors.add("用户名和密码不匹配！");
-    request.setAttribute("errors", errors);
 %>
 <jsp:forward page="login.jsp"></jsp:forward>
 <%
