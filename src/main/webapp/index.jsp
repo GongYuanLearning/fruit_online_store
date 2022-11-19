@@ -60,11 +60,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>天天生鲜-首页</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/jquery-3.6.1.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/slide.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/main.css">
+    <script type="text/javascript" src="${ctx}/js/jquery-3.6.1.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="${ctx}/js/slide.js"></script>
 </head>
 <body>
 <%@include file="common/top.jsp" %>
@@ -91,18 +91,18 @@
     </ul>
     <div class="slide fl">
         <ul class="slide_pics">
-            <li><img src="images/slide.jpg" alt="幻灯片"></li>
-            <li><img src="images/slide02.jpg" alt="幻灯片"></li>
-            <li><img src="images/slide03.jpg" alt="幻灯片"></li>
-            <li><img src="images/slide04.jpg" alt="幻灯片"></li>
+            <li><img src="${ctx}/images/slide.jpg" alt="幻灯片"></li>
+            <li><img src="${ctx}/images/slide02.jpg" alt="幻灯片"></li>
+            <li><img src="${ctx}/images/slide03.jpg" alt="幻灯片"></li>
+            <li><img src="${ctx}/images/slide04.jpg" alt="幻灯片"></li>
         </ul>
         <div class="prev"></div>
         <div class="next"></div>
         <ul class="points"></ul>
     </div>
     <div class="adv fl">
-        <a href="#"><img src="images/adv01.jpg"></a>
-        <a href="#"><img src="images/adv02.jpg"></a>
+        <a href="#"><img src="${ctx}/images/adv01.jpg"></a>
+        <a href="#"><img src="${ctx}/images/adv02.jpg"></a>
     </div>
 </div>
 
@@ -116,7 +116,7 @@
     </div>
 
     <div class="goods_con clearfix">
-        <div class="goods_banner fl"><img src="images/banner01.jpg"></div>
+        <div class="goods_banner fl"><img src="${ctx}/images/banner01.jpg"></div>
         <ul class="goods_list fl">
             <c:forEach items="${entry.value}" var="product">
             <li>

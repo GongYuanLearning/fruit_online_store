@@ -19,6 +19,7 @@ Fruit online store - java web learning project
 - `jdbc-crud`分支: 包含了数据CRUD操作的案例；
 - `servlet`分支: 包含了servlet的案例；
 - `servlet-register`分支: 包含了servlet的案例；
+- `servlet-cookie`分支: 包含了cookie的案例；
 - `servlet-session`分支: 包含了session的案例；
 - `servlet-filter`分支: 包含了filter的案例；
 - `servlet-listener`分支: 包含了listener的案例；

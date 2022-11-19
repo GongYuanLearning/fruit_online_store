@@ -41,7 +41,6 @@
                 </c:forEach>
             </div>
             <div class="form_input">
-
                 <form action="${ctx}/login" method="post">
                     <input type="text" name="username" value="${username}" class="name_input" placeholder="请输入用户名">
                     <div class="user_error">输入错误</div>

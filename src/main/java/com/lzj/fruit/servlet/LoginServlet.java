@@ -64,12 +64,12 @@ public class LoginServlet extends HttpServlet {
                     cookie.setPath("/");
                     response.addCookie(cookie);
                 }
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index");
             } else {
                 List<String> errors = new ArrayList<>(); // 存储错误消息的list
                 errors.add("用户名和密码不匹配！");
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+                request.getRequestDispatcher("login").forward(request, response);
             }
         } catch (Exception e) {
             throw new ServletException(e);
