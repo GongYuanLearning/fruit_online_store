@@ -1,12 +1,14 @@
 package com.lzj.fruit.listener;
 
 import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
  * 定义一个监听器，统计网站在线人数，即统计session
  */
+@WebListener
 public class OnlineCountListener implements HttpSessionListener {
     //创建session监听，一旦创建session就触发一次这个事件
     @Override

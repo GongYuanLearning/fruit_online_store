@@ -43,7 +43,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
         for (String notRequiringLoginUrl : notRequiringLoginUrls) {
-            if(url.contains(contextPath + notRequiringLoginUrl)) {
+            if(url.contains(contextPath + "/" + notRequiringLoginUrl)) {
                 // 不需要登陆，返回
                 chain.doFilter(request, response);
                 return;
