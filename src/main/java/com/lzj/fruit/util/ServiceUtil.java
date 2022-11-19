@@ -18,5 +18,10 @@ public final class ServiceUtil {
     public static boolean isValidUsername(String value) {
         return Objects.nonNull(value) && value.matches(USER_NAME_PATTERN);
     }
+
+    public static boolean notNullOrEmpty(String str) {
+        return Objects.nonNull(str) &&
+                !str.trim().isEmpty();
+    }
 }
 

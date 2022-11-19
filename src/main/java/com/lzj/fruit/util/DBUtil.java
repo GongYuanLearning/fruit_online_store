@@ -5,6 +5,7 @@ import com.lzj.fruit.dao.impl.UserDaoImpl;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Objects;
 import java.util.Properties;
 
 public final class DBUtil {
