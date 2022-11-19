@@ -4,6 +4,8 @@ import com.lzj.fruit.dto.SearchResult;
 import com.lzj.fruit.dto.UserCriteria;
 import com.lzj.fruit.entity.User;
 
+import java.util.List;
+
 public interface UserDao {
     /**
      * 创建用户

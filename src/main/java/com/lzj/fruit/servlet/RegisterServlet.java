@@ -5,13 +5,9 @@ import com.lzj.fruit.service.UserService;
 import com.lzj.fruit.service.impl.UserServiceImpl;
 import com.lzj.fruit.util.ServiceUtil;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -28,9 +24,9 @@ import java.util.Properties;
         value = "/register",
         loadOnStartup = 1,
         initParams = {
-                @WebInitParam(name="encoding", value="UTF-8")
+            @WebInitParam(name="encoding", value="UTF-8")
         }
-)
+        )
 public class RegisterServlet extends HttpServlet {
     private String encoding;
     private UserService userService;
@@ -49,7 +45,6 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding(encoding); // 在调用具体方法前，设置字符编码
         String username = request.getParameter("username");
         String pwd = request.getParameter("pwd");
         String cpwd = request.getParameter("cpwd");
@@ -57,7 +52,6 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String birthDateStr = request.getParameter("birthDate");
         LocalDate birthDate = LocalDate.parse(birthDateStr, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-
         String agreement = request.getParameter("allow");
         if (ServiceUtil.isValidUsername(username)
                 && "on".equals(agreement)
@@ -84,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
                 errors.add("密码不匹配！");
             }
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("register").forward(request, response);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
 }

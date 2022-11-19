@@ -12,4 +12,3 @@ public class SearchResult<T> {
     private int pageSize;
     private int pageNumber;
 }
-

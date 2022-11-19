@@ -3,6 +3,7 @@ package com.lzj.fruit.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * 查询User的条件对象
@@ -21,4 +22,3 @@ public class UserCriteria {
     private String email;
     private LocalDate birthday;
 }
-

@@ -6,17 +6,15 @@ import com.lzj.fruit.dto.UserCriteria;
 import com.lzj.fruit.entity.User;
 import com.lzj.fruit.exception.NotFoundException;
 import com.lzj.fruit.util.DBUtil;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;

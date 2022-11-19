@@ -1,19 +1,19 @@
 package com.lzj.fruit.servlet;
 
+import com.lzj.fruit.entity.User;
 import com.lzj.fruit.service.UserService;
 import com.lzj.fruit.service.impl.UserServiceImpl;
+import com.lzj.fruit.util.ServiceUtil;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet(name = "LoginServlet",
         value = "/login",
@@ -50,16 +50,19 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding(encoding); // 在调用具体方法前，设置字符编码
         String username = request.getParameter("username");
         String pwd = request.getParameter("pwd");
         String rememberMe = request.getParameter("rememberMe");
         try {
-            boolean res = userService.login(username, pwd);
-            if (res) {
+            User user = userService.login(username, pwd);
+            if (Objects.nonNull(user)) {
+                // 登录后，在session中保存username
+                request.getSession().setAttribute("username", username);
+                request.getSession().setAttribute("user", user);
                 // 返回用户相关信息的cookie：username_cookie=用户名
                 if ("on".equals(rememberMe)) {
-                    Cookie cookie = new Cookie("username_cookie", username);
+                    Cookie cookie = new Cookie("rememberMe",
+                            URLEncoder.encode(username, StandardCharsets.UTF_8.name()));
                     cookie.setMaxAge(7 * 24 * 60 * 60);
                     cookie.setPath("/");
                     response.addCookie(cookie);
@@ -69,11 +72,10 @@ public class LoginServlet extends HttpServlet {
                 List<String> errors = new ArrayList<>(); // 存储错误消息的list
                 errors.add("用户名和密码不匹配！");
                 request.setAttribute("errors", errors);
-                request.getRequestDispatcher("login").forward(request, response);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (Exception e) {
             throw new ServletException(e);
         }
     }
 }
-

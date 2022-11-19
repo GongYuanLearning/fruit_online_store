@@ -20,6 +20,17 @@ public class UserServiceImpl implements UserService {
         passwordEncryptor = new RFC2307SMD5PasswordEncryptor();
     }
 
+    private static List<User> validUsers = new ArrayList<>();
+    static {
+        validUsers.add(new User(1L, "admin", "admin", "", "admin@test.com", "", null));
+        validUsers.add(new User(2L, "user", "password", "", "user@test.com", "", null));
+        validUsers.add(new User(3L, "张三", "password", "", "user@test.com", "", null));
+    }
+
+    public static List<User> getValidUsers() {
+        return validUsers;
+    }
+
     /**
      * 处理用户登录。
      * 如果用户名和密码能够在validUsers中找到，登录成功，返回true。
@@ -28,9 +39,9 @@ public class UserServiceImpl implements UserService {
      * @param password
      * @return
      */
-    public boolean login(String username, String password) throws Exception {
+    public User login(String username, String password) throws Exception {
         User user = userDao.getByUsernameOrEmail(username);
-        return Objects.nonNull(user) && passwordEncryptor.checkPassword(password, user.getPwdHash());
+        return Objects.nonNull(user) && passwordEncryptor.checkPassword(password, user.getPwdHash()) ? user : null;
     }
 
     @Override
@@ -38,12 +49,6 @@ public class UserServiceImpl implements UserService {
         return this.userDao.getByUsernameOrEmail(username);
     }
 
-    /**
-     * 注册用户。通过添加用户到数据库完成注册。
-     * @param user
-     * @return
-     * @throws Exception
-     */
     public User register(User user) throws Exception {
         // 密码进行hash处理
         user.setPwdHash(passwordEncryptor.encryptPassword(user.getPassword()));

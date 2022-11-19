@@ -1,26 +1,31 @@
 package com.lzj.fruit.servlet;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.lzj.fruit.entity.User;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // cookie头中是否有用户相关信息的cookie：username_cookie
-        Cookie[] cookies = request.getCookies();
-        String username = null;
-        if (Objects.nonNull(cookies)) {
-            for (Cookie cookie : cookies) {
-                if ("username_cookie".equals(cookie.getName())) {
-                    username = cookie.getValue();
-                    break;
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");// 用于获取登录后存储在session中的user对象
+        if (Objects.isNull(username)) {
+            // 7天之内免登录检查
+            // cookie头中是否有用户相关信息的cookie：username_cookie
+            Cookie[] cookies = request.getCookies();
+            if (Objects.nonNull(cookies)) {
+                for (Cookie cookie : cookies) {
+                    if ("rememberMe".equals(cookie.getName())) {
+                        username = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.name());
+                        break;
+                    }
                 }
             }
         }
@@ -33,5 +38,9 @@ public class IndexServlet extends HttpServlet {
             response.sendRedirect("login");
         }
     }
-}
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}
