@@ -84,7 +84,7 @@ public class RegisterServlet extends HttpServlet {
                 errors.add("密码不匹配！");
             }
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("jsp/register.jsp").forward(request, response);
+            request.getRequestDispatcher("register").forward(request, response);
         }
     }
 }
