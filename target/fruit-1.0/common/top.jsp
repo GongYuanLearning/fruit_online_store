@@ -11,9 +11,9 @@
         欢迎您：<em>张 山</em>
       </div>
       <div class="login_btn fl">
-        <a href="login.jsp">登录</a>
+        <a href="${ctx}/login">登录</a>
         <span>|</span>
-        <a href="register.jsp">注册</a>
+        <a href="${ctx}/register">注册</a>
       </div>
       <div class="user_link fl">
         <span>|</span>

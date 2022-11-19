@@ -29,10 +29,10 @@ public class UserDaoImpl implements UserDao {
     public static final String UPDATE_USER_SQL = "UPDATE user SET %s WHERE id=?";
     public static final String GET_USERS_SQL = "SELECT id, username, email, phone, birth_date FROM user WHERE 1=1";
     public static final String GET_USERS_COUNT_SQL = "SELECT COUNT(*) FROM user WHERE 1=1";
-    public static final String GET_USER_BY_USERNAME_OR_EMAIL_SQL = "SELECT id, username, email, phone, birth_date FROM user where username=? OR email=?";
+    public static final String GET_USER_BY_USERNAME_OR_EMAIL_SQL = "SELECT id, username, email, phone, birth_date, pwdHash FROM user where username=? OR email=?";
     public static final String DELETE_USER_BY_ID_SQL = "DELETE FROM user WHERE id=?";
     public static final String ADD_USER_SQL = "INSERT INTO user(username, pwdHash, email, phone, birth_date) VALUES (?, ?, ?, ?, ?)";
-    public static final String GET_USER_BY_ID_SQL = "SELECT id, username, email, phone, birth_date FROM user where id=?";
+    public static final String GET_USER_BY_ID_SQL = "SELECT id, username, pwdHash, email, phone, birth_date FROM user where id=?";
 
     @Override
     public User create(User user) throws Exception {
@@ -173,6 +173,7 @@ public class UserDaoImpl implements UserDao {
         user.setUsername(rs.getString("username"));
         user.setEmail(rs.getString("email"));
         user.setPhone(rs.getString("phone"));
+        user.setPwdHash(rs.getString("pwdHash"));
         Date birthDate = rs.getDate("birth_date");
         if (Objects.nonNull(birthDate)) {
             user.setBirthDate(birthDate.toLocalDate());

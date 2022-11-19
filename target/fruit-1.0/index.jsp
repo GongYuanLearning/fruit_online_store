@@ -9,8 +9,7 @@
   version: 1.0
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@include file="common/ctx.jsp" %>
 <%!
     private static void addProduct(String[] names, BigDecimal[] prices, String[] imagePaths, List<Product> products) {
         for (int i = 0; i < names.length; i++) {

@@ -646,3 +646,8 @@ html,body{height:100%}
 	margin: 15px 25px;
 	color: #ba1414;
 }
+
+.login_info {
+	margin-right: 1rem;
+	display: block;
+}
