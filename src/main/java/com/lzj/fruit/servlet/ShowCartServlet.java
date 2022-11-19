@@ -38,10 +38,6 @@ public class ShowCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
         User user = (User) session.getAttribute("user");
-        if(Objects.isNull(user)) {
-            resp.sendRedirect("login");
-            return;
-        }
         Cart cart = (Cart) session.getAttribute("cart");
         if(Objects.isNull(cart)) {
             try {

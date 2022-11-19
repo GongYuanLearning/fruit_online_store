@@ -29,7 +29,7 @@ public class ProductDetailServlet extends HttpServlet {
             long id = Long.parseLong(idStr);
             Product product = productService.getProductById(id);
             request.setAttribute("product", product);
-            request.getRequestDispatcher("/jsp/detail.jsp").forward(request, response);
+            request.getRequestDispatcher("detail.jsp").forward(request, response);
         } catch( NumberFormatException e) {
             throw new ServletException("id必须为整数!");
         } catch (Exception e) {
