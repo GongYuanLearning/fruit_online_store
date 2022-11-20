@@ -69,9 +69,12 @@
       </div>
     </div>
     <div class="total">总价：<em>16.80元</em></div>
+    <form style="display:none;" id="add_cart_form" action="${ctx}/cart" method="post">
+      <input type="hidden" name="id" value="${product.id}" />
+    </form>
     <div class="operate_btn">
       <a href="javascript:;" class="buy_btn">立即购买</a>
-      <a href="${ctx}/cart?id=${product.id}" class="add_cart" id="add_cart">加入购物车</a>
+      <a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
     </div>
   </div>
 </div>
@@ -104,7 +107,7 @@
     <div class="tab_content">
       <dl>
         <dt>商品详情：</dt>
-        <dd>${product.description}</dd>
+        <dd>${product.detail}</dd>
       </dl>
     </div>
 
@@ -114,7 +117,7 @@
 <%@include file="common/footer.jsp" %>
 <div class="add_jump"></div>
 
-<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+<script type="text/javascript" src="js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
   var $add_x = $('#add_cart').offset().top;
   var $add_y = $('#add_cart').offset().left;
@@ -133,6 +136,7 @@
               });
 
             });
+    $('#add_cart_form').submit();
   })
 </script>
 

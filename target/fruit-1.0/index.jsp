@@ -10,50 +10,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="common/ctx.jsp" %>
-<%!
-    private static void addProduct(String[] names, BigDecimal[] prices, String[] imagePaths, List<ProductDto> products) {
-        for (int i = 0; i < names.length; i++) {
-            String name = names[i];
-            BigDecimal price = prices[i];
-            String imagePath = imagePaths[i];
-
-            ProductDto product = new ProductDto();
-            product.setName(name);
-            product.setImagePath(imagePath);
-            product.setPrice(price);
-            products.add(product);
-        }
-    }
-%>
 <%
-    List<String> categories = new ArrayList<>();
     List<String> categoriesClasses = new ArrayList<>();
-    categories.add("新鲜水果");
     categoriesClasses.add("fruit");
-    categories.add("海鲜水产");
     categoriesClasses.add("seafood");
-    categories.add("猪牛羊肉");
     categoriesClasses.add("meet");
-    categories.add("禽类蛋品");
     categoriesClasses.add("egg");
-    categories.add("新鲜蔬菜");
     categoriesClasses.add("vegetables");
-    categories.add("速冻食品");
     categoriesClasses.add("ice");
-
-    Map<String, List<ProductDto>> productsByCategory = new HashMap<>();
-    for(String category : categories) {
-        List<ProductDto> products = new ArrayList<>();
-        String[] names = new String[] {"草莓", "葡萄", "柠檬", "奇异果"};
-        BigDecimal[] prices = new BigDecimal[] {BigDecimal.valueOf(30), BigDecimal.valueOf(10), BigDecimal.valueOf(15), BigDecimal.valueOf(20)};
-        String[] imagePaths = new String[] {"images/goods/goods003.jpg", "images/goods/goods002.jpg", "images/goods/goods001.jpg", "images/goods/goods012.jpg"};
-        addProduct(names, prices, imagePaths, products);
-        productsByCategory.put(category, products);
-    }
-
-    request.setAttribute("categories", categories);
     request.setAttribute("categoriesClasses", categoriesClasses);
-    request.setAttribute("productsByCategory", productsByCategory);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +51,7 @@
 <div class="center_con clearfix">
     <ul class="subnav fl">
         <c:forEach items="${categories}" var="category" varStatus="status">
-            <li><a href="#${category}" class="${categoriesClasses[status.index]}">${category}</a></li>
+            <li><a href="product/list?categoryId=${category.id}" class="${categoriesClasses[status.index]}">${category.name}</a></li>
         </c:forEach>
     </ul>
     <div class="slide fl">
@@ -106,24 +71,24 @@
     </div>
 </div>
 
-<c:forEach items="${productsByCategory}" var="entry">
+<c:forEach items="${categories}" var="category">
 <div class="list_model">
     <div class="list_title clearfix">
-        <h3 class="fl" id="新鲜水果">${entry.key}</h3>
+        <h3 class="fl" id="新鲜水果">${category.name}</h3>
         <div class="subtitle fl">
         </div>
-        <a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+        <a href="product/list?categoryId=${category.id}" class="goods_more fr" id="fruit_more">查看更多 ></a>
     </div>
 
     <div class="goods_con clearfix">
         <div class="goods_banner fl"><img src="${ctx}/images/banner01.jpg"></div>
         <ul class="goods_list fl">
-            <c:forEach items="${entry.value}" var="product">
-            <li>
-                <h4><a href="#">${product.name}</a></h4>
-                <a href="#"><img src="${product.imagePath}"></a>
-                <div class="prize">¥ ${product.price}</div>
-            </li>
+            <c:forEach items="${productsByCategory[category.id]}" var="product">
+                <li>
+                    <h4><a href="#">${product.name}</a></h4>
+                    <a href="#"><img src="${product.imagePath}"></a>
+                    <div class="prize">¥ ${product.price}</div>
+                </li>
             </c:forEach>
         </ul>
     </div>

@@ -19,9 +19,16 @@ INSERT INTO user(username, pwdHash, email, phone, birth_date) values
                                                                   ('test5', '{SMD5}taH4jBjvTIymiYh+ISoAG3cQ8GqByCkv', 'test5@test.com', '17333333335', '2000-01-01');
 
 INSERT INTO product_category(id, name) VALUES
-                                           (1, '新鲜水果'),
-                                           (2, '海鲜水产)');
+    (1, '新鲜水果'),
+    (2, '海鲜水产'),
+    (3, '猪牛羊肉'),
+    (4, '禽类蛋品'),
+    (5, '新鲜蔬菜'),
+    (6, '速冻食品');
 
 INSERT INTO product(name, imagePath, description, detail, price, unit, on_store_time, category_id) VALUES
-                                                                                                       ('草莓', 'images/goods/goods001.jpg', '长沙本地草莓', '长沙本地草莓', 50.00, '500g', current_timestamp(), 1),
-                                                                                                       ('青芒', 'images/goods/goods002.jpg', '海南青芒', '海南青芒', 80.00, '500g', current_timestamp(), 1);
+   ('草莓', 'images/goods/goods003.jpg', '长沙本地草莓', '长沙本地草莓', 30.00, '500g', current_timestamp, 1),
+   ('葡萄', 'images/goods/goods002.jpg', '海南青芒', '海南青芒', 10.00, '500g', current_timestamp, 1),
+   ('柠檬', 'images/goods/goods001.jpg', '海南青芒', '海南青芒', 5.00, '500g', current_timestamp, 1),
+   ('奇异果', 'images/goods/goods012.jpg', '海南青芒', '海南青芒', 25.00, '500g', current_timestamp, 1)
+   ;
