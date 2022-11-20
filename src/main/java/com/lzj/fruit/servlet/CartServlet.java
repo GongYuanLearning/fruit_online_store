@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,24 +42,37 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        if(Objects.isNull(id) || id.isEmpty()) {
-            resp.setContentType("application/json");
-            resp.getWriter().println("{\n" +
-                    "  \"error\": \"id不能为空！\"\n" +
-                    "}");
-            return;
+        HttpSession session = req.getSession(true);
+        User user = (User) session.getAttribute("user");
+        Cart cart = (Cart) session.getAttribute("cart");
+        if(Objects.isNull(cart)) {
+            try {
+                List<CartItem> cartItems = cartItemService.getCartItems(user.getId());
+                cart = new Cart();
+                cart.setItems(cartItems);
+                session.setAttribute("cart", cart);
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
         }
+
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (CartItem cartItem : cart.getItems()) {
+            totalAmount.add(cartItem.getTotalAmount());
+        }
+        req.setAttribute("cartItems", cart.getItems());
+        req.setAttribute("totalAmount", totalAmount);
+        req.getRequestDispatcher("cart.jsp").forward(req, resp);
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
         try {
             // 从数据库查找product
             Product product = getProduct(id);
 
             HttpSession session = req.getSession(false);
             User user = (User) session.getAttribute("user");
-            if(Objects.isNull(user)) {
-                resp.sendRedirect("login");
-                return;
-            }
             long userId = user.getId();
             Cart cart = (Cart) session.getAttribute("cart");// 从session获取购物车cart
             if(null == cart) { // 第一次访问，购物车cart不存在的情况
@@ -89,10 +103,9 @@ public class CartServlet extends HttpServlet {
                 cart.getItems().add(item);
             }
 
-            resp.sendRedirect("showCart");
+            resp.sendRedirect("cart");
         } catch (Exception e) {
-            resp.setContentType("application/json");
-            resp.getWriter().write("{\"success\": false, \"error\": \"" + e.getMessage() + "\"}");
+            throw new ServletException(e);
         }
     }
 
