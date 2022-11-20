@@ -3,7 +3,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="com.lzj.fruit.dto.Product" %>
+<%@ page import="com.lzj.fruit.dto.ProductDto" %>
 <%@ page import="java.math.BigDecimal" %><%--
   author: Zhijie Liu
   version: 1.0
@@ -11,13 +11,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="common/ctx.jsp" %>
 <%!
-    private static void addProduct(String[] names, BigDecimal[] prices, String[] imagePaths, List<Product> products) {
+    private static void addProduct(String[] names, BigDecimal[] prices, String[] imagePaths, List<ProductDto> products) {
         for (int i = 0; i < names.length; i++) {
             String name = names[i];
             BigDecimal price = prices[i];
             String imagePath = imagePaths[i];
 
-            Product product = new Product();
+            ProductDto product = new ProductDto();
             product.setName(name);
             product.setImagePath(imagePath);
             product.setPrice(price);
@@ -41,9 +41,9 @@
     categories.add("速冻食品");
     categoriesClasses.add("ice");
 
-    Map<String, List<Product>> productsByCategory = new HashMap<>();
+    Map<String, List<ProductDto>> productsByCategory = new HashMap<>();
     for(String category : categories) {
-        List<Product> products = new ArrayList<>();
+        List<ProductDto> products = new ArrayList<>();
         String[] names = new String[] {"草莓", "葡萄", "柠檬", "奇异果"};
         BigDecimal[] prices = new BigDecimal[] {BigDecimal.valueOf(30), BigDecimal.valueOf(10), BigDecimal.valueOf(15), BigDecimal.valueOf(20)};
         String[] imagePaths = new String[] {"images/goods/goods003.jpg", "images/goods/goods002.jpg", "images/goods/goods001.jpg", "images/goods/goods012.jpg"};

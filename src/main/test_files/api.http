@@ -1,0 +1,11 @@
+POST http://localhost:8080/fruit/product/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="productsFile"; filename="products.csv"
+Content-Type: text/csv
+
+< ./products.csv
+--WebAppBoundary--
+
+

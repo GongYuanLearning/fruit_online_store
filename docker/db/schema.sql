@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS product (
                                        unit CHAR(10),
                                        on_store_time datetime DEFAULT CURRENT_TIMESTAMP,
                                        category_id BIGINT UNSIGNED,
-                                       CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES product_category(id)
+                                       CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES product_category(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS cart_item (
