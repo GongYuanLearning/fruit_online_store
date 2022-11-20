@@ -7,20 +7,31 @@ import com.lzj.fruit.dto.ProductDto;
 import com.lzj.fruit.dto.SearchResult;
 import com.lzj.fruit.entity.Product;
 import com.lzj.fruit.entity.ProductCategory;
+import com.lzj.fruit.entity.User;
 import com.lzj.fruit.exception.NotFoundException;
 import com.lzj.fruit.exception.PersistentException;
 import com.lzj.fruit.util.DBUtil;
+import com.lzj.fruit.util.ServiceUtil;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
+import static com.lzj.fruit.dao.impl.UserDaoImpl.DELETE_USER_BY_ID_SQL;
 
 public class ProductDaoImpl implements ProductDao {
     private static final String ADD_PRODUCT_SQL = "INSERT INTO product(name, imagePath, description, detail, price, unit, category_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_PRODUCT_SQL = "UPDATE product SET %s WHERE id=?";
+    public static final String DELETE_PRODUCT_BY_ID_SQL = "DELETE FROM product WHERE id=?";
 
     private ProductCategoryDao productCategoryDao;
 
@@ -45,6 +56,74 @@ public class ProductDaoImpl implements ProductDao {
             pstmt.executeBatch(); // 执行批处理
         } catch (Exception e) {
             throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public Product create(ProductDto product) throws Exception {
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(ADD_PRODUCT_SQL, Statement.RETURN_GENERATED_KEYS)
+        ) {
+            pstmt.setString(1, product.getName());
+            pstmt.setString(2, product.getImagePath());
+            pstmt.setString(3, product.getDescription());
+            pstmt.setString(4, product.getDetail());
+            pstmt.setBigDecimal(5, product.getPrice());
+            pstmt.setString(6, product.getUnit());
+            pstmt.setLong(7, product.getCategoryId());
+            pstmt.executeUpdate();
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys(); // 获取生成的主键
+            if (generatedKeys.next()) {
+                product.setId(generatedKeys.getLong(1)); // 只能用columnIndex参数
+            }
+            return getProductById(product.getId());
+        }
+    }
+
+    @Override
+    public Product update(ProductDto product) throws Exception {
+        Product dbProduct = getProductById(product.getId());
+
+        List<String> segments = new ArrayList<>();
+        List<String> fields = new ArrayList<>();
+        if (ServiceUtil.notNullOrEmpty(product.getName())) {
+            segments.add("name=?");
+            fields.add("name");
+        }
+        if (product.getPrice() != null) {
+            segments.add("price=?");
+            fields.add("price");
+        }
+        String updateSegment = String.join(",", segments);
+        String sql = String.format(UPDATE_PRODUCT_SQL, updateSegment);
+
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)
+        ) {
+            if (ServiceUtil.notNullOrEmpty(product.getName())) {
+                int idx = fields.indexOf("name");
+                pstmt.setString(idx + 1, product.getName());
+            }
+            if (product.getPrice() != null) {
+                int idx = fields.indexOf("price");
+                pstmt.setBigDecimal(idx + 1, product.getPrice());
+            }
+            pstmt.setLong(fields.size() + 1, product.getId());
+
+            pstmt.executeUpdate();
+        }
+        return dbProduct;
+    }
+
+    @Override
+    public void delete(long id) throws Exception {
+        getProductById(id);
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(DELETE_PRODUCT_BY_ID_SQL)
+        ) {
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
         }
     }
 
