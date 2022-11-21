@@ -34,6 +34,14 @@ public class AuthenticationFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute("user");
         // 1 检查当前请求的url是否需要登录
+        // http://localhost:8080/fruit/
+        // http://localhost:8080/fruit/login
+        // http://localhost:8080/fruit/register
+        // http://localhost:8080/fruit/index
+        // http://localhost:8080/fruit/css/**
+        // http://localhost:8080/fruit/js/**
+        // http://localhost:8080/fruit/images/**
+
         String url = httpServletRequest.getRequestURL().toString();
         // 不需要登陆的页面，检查
         String contextPath = httpServletRequest.getContextPath();
@@ -43,7 +51,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
         for (String notRequiringLoginUrl : notRequiringLoginUrls) {
-            if(url.contains(contextPath + notRequiringLoginUrl)) {
+            if(url.contains(contextPath + "/" + notRequiringLoginUrl)) {
                 // 不需要登陆，返回
                 chain.doFilter(request, response);
                 return;
