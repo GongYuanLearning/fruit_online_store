@@ -55,6 +55,8 @@ public class AuthenticationFilter implements Filter {
 //            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 //            httpServletResponse.sendRedirect("login?redirect=" + url);
             request.getRequestDispatcher("login?redirect=" + url).forward(request, response);
+        } else {
+            chain.doFilter(request, response);
         }
     }
 }
