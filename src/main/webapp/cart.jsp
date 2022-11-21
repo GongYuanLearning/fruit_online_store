@@ -47,7 +47,7 @@
   <li class="col01"><input type="checkbox" name="" checked=""></li>
   <li class="col02">全选</li>
   <li class="col03">合计(不含运费)：<span>¥</span><em>${totalAmount}</em><br>共计<b>${cartItems.size()}</b>件商品</li>
-  <li class="col04"><a href="place_order.html">去结算</a></li>
+  <li class="col04"><a href="place_order">去结算</a></li>
 </ul>
 
 <%@include file="common/footer.jsp" %>

@@ -28,7 +28,7 @@ Fruit online store - java web learning project
 - `servlet-ajax`分支: 包含了ajax的案例；
 - `search-products`分支: 包含了ajax的案例；
 - `cart`分支: 包含了ajax的案例；
-- `backend-part1`分支: 包含了ajax的案例；
+- `order`分支: 包含了ajax的案例；
 - `backend-part2`分支: 包含了ajax的案例；
 -  
 

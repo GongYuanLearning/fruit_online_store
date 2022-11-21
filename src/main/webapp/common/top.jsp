@@ -8,10 +8,17 @@
     <div class="welcome fl">欢迎来到天天生鲜!</div>
     <div class="fr">
       <div class="login_info fl">
-        欢迎您：<em>张 山</em>
+        欢迎您：<em>${user.username}</em>
       </div>
       <div class="login_btn fl">
-        <a href="${ctx}/login">登录</a>
+        <c:choose>
+          <c:when test="${not empty user}">
+            <a href="${ctx}/logout">退出</a>
+          </c:when>
+          <c:otherwise>
+            <a href="${ctx}/login">登录</a>
+          </c:otherwise>
+        </c:choose>
         <span>|</span>
         <a href="${ctx}/register">注册</a>
       </div>
