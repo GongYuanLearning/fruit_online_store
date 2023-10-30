@@ -21,8 +21,8 @@ DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS product_category;
 
 CREATE TABLE IF NOT EXISTS user(
-                                   id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                                   username VARCHAR(255) NOT NULL UNIQUE CHECK(username REGEXP '\\w{3,}'),
+    id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE CHECK(username REGEXP '\\w{3,}'),
     pwdHash VARCHAR(255) NOT NULL, -- 密码的hash值
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(11) UNIQUE CHECK(phone REGEXP '1[0-9]{10}'),
