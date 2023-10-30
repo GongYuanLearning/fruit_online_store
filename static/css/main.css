@@ -17,8 +17,9 @@ html,body{height:100%}
 	line-height:29px;
 }
 
-.login_info{
-	display:none;
+.login_info {
+	margin-right: 1rem;
+	display: block;
 }
 
 .login_info em{color:#ff8800}
@@ -639,4 +640,10 @@ html,body{height:100%}
 
 .stress{
 	color:#ff8800;
+}
+
+.errors {
+	font-size: 1rem;
+	color: red;
+	margin: 15px 0;
 }

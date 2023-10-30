@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mysql-db:
+    image: mysql:8
+    environment:
+      MYSQL_USER: "user" # 配置mysql用户名user
+      MYSQL_PASSWORD: "password" # 配置mysql用户user的密码
+      MYSQL_DATABASE: "fruits" # 配置mysql初始数据库
+      MYSQL_ROOT_PASSWORD: "password" # 配置mysql用户root的密码
+    ports:
+      - "3306:3306"
+
+    # 配置mysql的端口，分号前面是本地主机的端口，分号后面是容器中的端口
+
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - "./db/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./db/data.sql:/docker-entrypoint-initdb.d/2.sql"
